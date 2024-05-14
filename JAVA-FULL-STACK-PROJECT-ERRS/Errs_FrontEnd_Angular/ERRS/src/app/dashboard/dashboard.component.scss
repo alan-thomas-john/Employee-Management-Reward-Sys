@@ -1,0 +1,119 @@
+.position-relative {
+	position: relative;
+}
+
+.add-contact {
+	position: absolute;
+    right: 17px;
+    top: 57px;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+  }
+  
+  html {
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  .column {
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 20px;
+  }
+  
+  .about-section {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  
+  .container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .title {
+    color: black;
+    text-align: center !important;
+  }
+  
+  .button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #7b1fa2;
+    text-align: center;
+    cursor: pointer;
+    width: 96%;
+    font-weight: bold;
+  }
+  
+  .button:hover {
+    background-color: #555;
+  }
+  
+  @media screen and (max-width: 650px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  ///new
+  .user-card {
+    background-color: #3498db; /* Card background color */
+    color: #fff; /* Text color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.user-card:hover {
+    background-color: #2980b9; /* Darker background color on hover */
+}
+
+.container {
+    padding: 20px; /* Padding inside the container */
+}
+
+.title {
+    font-size: 1.5em; /* Title font size */
+    margin-bottom: 10px; /* Bottom margin for the title */
+}
+
+.welcome-msg {
+    font-size: 2em; /* Welcome message font size */
+    margin-bottom: 5px; /* Bottom margin for the welcome message */
+}
+
+.points-msg {
+    font-size: 1.2em; /* Points message font size */
+}
+
+.management-dashboard-container {
+  //display: flex;
+  //flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  height: 90vh; /* Specifying the desired height */
+}

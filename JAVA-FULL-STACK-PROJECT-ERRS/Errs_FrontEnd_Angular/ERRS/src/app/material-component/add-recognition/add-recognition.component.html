@@ -1,0 +1,39 @@
+<div class="recognition">
+  <div class="box col-sm-8">
+    <h3>Add Recognition</h3>
+    <form [formGroup]="recognitionForm" class="form-container" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="form-outline mb-4">
+            <mat-label for="recognitionName">Name of recognition</mat-label>
+            <input matInput type="text" id="recognitionName" formControlName="recognitionName" />
+            <mat-error *ngIf="recognitionForm.get('recognitionName')?.hasError('required')">
+              Name is required
+            </mat-error>
+            <mat-error *ngIf="recognitionForm.get('recognitionName')?.hasError('pattern')">
+              RecognitionName must contain only letters.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="form-outline mb-4">
+            <mat-label for="points">Points</mat-label>
+            <input matInput type="number" id="points" formControlName="points" />
+            <mat-error *ngIf="recognitionForm.get('points')?.hasError('required')">
+              Points is required
+            </mat-error>
+            <mat-error *ngIf="recognitionForm.get('points')?.hasError('pattern') || recognitionForm.get('points')?.hasError('min') || recognitionForm.get('points')?.hasError('max')">
+              Invalid format for points 
+            </mat-error>
+             
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <button mat-raised-button color="primary" class="btn-block mb-4"
+        [disabled]="recognitionForm.invalid">Submit</button>
+    </form>
+  </div>
+</div>

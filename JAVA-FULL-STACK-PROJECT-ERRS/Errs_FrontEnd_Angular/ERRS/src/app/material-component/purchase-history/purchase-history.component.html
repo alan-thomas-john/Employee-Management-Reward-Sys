@@ -1,0 +1,40 @@
+<div class="employee-purchasehistory-container">
+    <mat-card class="mat-elevation-z8">
+        <b><span>Purchase History</span></b>
+    </mat-card>
+    <hr>
+
+    <div class="responsive_table">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            
+            <ng-container matColumnDef="productName">
+                <th mat-header-cell *matHeaderCellDef> Ordered Product </th>
+                <td mat-cell *matCellDef="let element">{{ element.product.name }}</td>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="points">
+                <th mat-header-cell *matHeaderCellDef> Points </th>
+                <td mat-cell *matCellDef="let element">{{ element.points }}</td>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Purchased Date </th>
+                <td mat-cell *matCellDef="let element">{{ element.date | date: 'medium' }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="elements">
+        </mat-paginator>
+    </div>
+</div>

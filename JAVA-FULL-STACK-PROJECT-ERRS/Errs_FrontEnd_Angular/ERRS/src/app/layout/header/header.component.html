@@ -1,0 +1,18 @@
+<button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5">
+    <mat-icon>account_circle</mat-icon>
+</button>
+<mat-menu #profile="matMenu" class="mymegamenu">
+<button mat-menu-item (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon> Logout
+</button>
+
+<div *ngIf="userDetails" class="user-profile">
+    <div class="user-details">
+        <h2>Welcome,</h2>
+        <h2>{{ userDetails.sub }}!</h2>
+    <p>Employee Type: {{ userDetails.role }}</p>
+</div>
+</div>
+
+
+</mat-menu>

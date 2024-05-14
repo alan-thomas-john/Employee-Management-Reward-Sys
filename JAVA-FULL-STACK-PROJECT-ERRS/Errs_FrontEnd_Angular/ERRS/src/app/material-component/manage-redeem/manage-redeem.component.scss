@@ -1,0 +1,85 @@
+mat-form-field{
+    padding: 0px;
+}
+
+.float-right{
+    float: right;
+
+}
+
+table{
+    width: 100%;
+}
+
+mat-card{
+    padding-bottom: 30px !important;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.employee-reward-container {
+    //display: flex;
+    //flex-direction: column;
+    align-items: center;
+    justify-content: top;
+    height: 90vh; /* Specifying the desired height */
+  }
+  
+  .responsive_table {
+    width: 100%;
+    max-width: 1300px; /* Adjusting the maximum width as needed */
+  }
+
+  //userpoints
+
+  // Variables
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$font-family: 'Roboto', sans-serif;
+
+// Mixins
+@mixin font-style($size, $weight, $color) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
+// Styles
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+  .title {
+    @include font-style(2rem, 700, $primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .welcome-msg {
+    @include font-style(3rem, 300, $secondary-color);
+    margin-bottom: 2rem;
+  }
+
+  .points-msg {
+    @include font-style(1.5rem, 400, $secondary-color);
+  }
+}
+
+.validation-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.validation-message {
+  color: red;
+  margin-top: 10px;
+}

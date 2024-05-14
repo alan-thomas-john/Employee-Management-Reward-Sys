@@ -1,0 +1,72 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+<div class="box">
+    <div class="col-12">
+        <h3>Top Performers</h3>
+        <ng-container *ngIf="winningPerfomer && winningPerfomer.length > 0">
+            <h4 *ngFor="let performer of winningPerfomer">{{performer.name}} - {{performer.receivedPoints}}</h4>
+        </ng-container>
+        <h4 *ngIf="!winningPerfomer || winningPerfomer.length === 0">No winning performers found</h4>
+    </div>
+</div>
+
+<div class="box">
+    <div class="row">
+        <div class="col-8">
+            <h3>Recognition</h3>
+        </div>
+        <div class="col-4">
+            <button mat-raised-button color="primary" routerLink="../recognitionHandler">Add Recognition</button>
+        </div>
+    </div>
+
+    <div class="col-sm-10">
+        <table mat-table class="table" [dataSource]="recognitionList">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let recognition">{{ recognition.recognitionName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="points">
+                <th mat-header-cell *matHeaderCellDef>Points</th>
+                <td mat-cell *matCellDef="let recognition">{{ recognition.points }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef>Edit</th>
+                <td mat-cell *matCellDef="let recognition">
+                    <button mat-icon-button [routerLink]="'../recognitionHandler/' + recognition.recognitionId">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef>Delete</th>
+                <td mat-cell *matCellDef="let recognition">
+                    <button mat-icon-button (click)="deleteRecognition(recognition.recognitionId)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="assign">
+                <th mat-header-cell *matHeaderCellDef>Assign</th>
+                <td mat-cell *matCellDef="let recognition">
+                    <button mat-icon-button class="btn btn-assign"
+                        [routerLink]="'../recognition/' + recognition.recognitionId">
+                        <mat-icon aria-hidden="false" aria-label="Assign">emoji_events</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="elements">
+        </mat-paginator>
+
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="management-dashboard-container">
+
+    <body>
+        <mat-card>
+            <b><span>DashBoard</span></b>
+        </mat-card>
+        <br>
+        <div class="row">
+
+            <div class="column">
+                <div class="card user-card">
+                    <div class="container">
+                        <h2 class="title">Logged In User</h2>
+                        <h1 class="welcome-msg">Welcome, {{userData?.name}}!</h1>
+                        <p class="points-msg">Your BytePoints: {{userData?.points}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <div class="container">
+                        <h2 class="title">Total Category</h2>
+                        <h1 class="title">{{data?.category}}</h1>
+                        <p><button class="button" [routerLink]="['/errs/category']">View Category</button></p>
+                    </div>
+                </div>
+            </div>
+
+          
+
+            <div class="column">
+                <div class="card">
+                    <div class="container">
+                        <h2 class="title">Top performers</h2>
+                        <div *ngFor="let performer of winningPerfomer">
+                            <h1 class="title">{{ performer.name }} - {{performer.receivedPoints}}  Points</h1>
+                            <!-- Display other performer details as needed -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <div class="container">
+                        <h2 class="title">Total Rewards</h2>
+                        <h1 class="title">{{data?.product}}</h1>
+                        <p><button class="button" [routerLink]="['/errs/product']">View Rewards</button></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</div>

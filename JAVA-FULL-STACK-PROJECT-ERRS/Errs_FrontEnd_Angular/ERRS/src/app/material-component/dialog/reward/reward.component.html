@@ -1,0 +1,112 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+        <span>{{dialogData.action}} Reward</span>
+        <span class="spacer"></span>
+        <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="rewardForm">
+        <div style="display: flex; flex-direction: column;">
+            <div style="display: flex; flex-wrap: wrap;">
+                <mat-form-field appearance="outline" [ngStyle]="{ 'width': '100%' }">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" required>
+                    <mat-error *ngIf="rewardForm.controls.name.touched && rewardForm.controls.name.invalid">
+                        <span *ngIf="rewardForm.controls.name.errors.required">This field is mandatory.</span>
+                        <span *ngIf="rewardForm.controls.name.errors.pattern">This fiels is invalid.</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap;">
+                <mat-form-field appearance="outline" [ngStyle]="{ 'width': '100%' }">
+                    <mat-label>Points</mat-label>
+                    <input matInput formControlName="points" required>
+                    <mat-error *ngIf="rewardForm.controls.points.touched && rewardForm.controls.points.invalid">
+                        <span *ngIf="rewardForm.controls.points.errors.required">This field is mandatory.</span>
+                        <span *ngIf="rewardForm.controls.points.errors.pattern">This field is invalid,provide appropriate valid points.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" [ngStyle]="{ 'width': '100%' }">
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="categoryId">
+                        <mat-option *ngFor="let category of categories" [value]="category.id">
+                            {{category.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap;">
+                <mat-form-field appearance="outline" [ngStyle]="{ 'width': '100%' }">
+                    <mat-label>Description</mat-label>
+                    <input matInput formControlName="description" required>
+                    <mat-error *ngIf="rewardForm.controls.description.touched && rewardForm.controls.description.invalid">
+                        <span *ngIf="rewardForm.controls.description.errors.required">This field is mandatory.</span>
+                        <span *ngIf="rewardForm.controls.description.errors.pattern">This fiels is invalid.</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap;">
+                <mat-form-field appearance="outline" [ngStyle]="{ 'width': '100%' }">
+                    <mat-label>Manufacturer</mat-label>
+                    <input matInput formControlName="manufacturer" required>
+                    <mat-error *ngIf="rewardForm.controls.manufacturer.touched && rewardForm.controls.manufacturer.invalid">
+                        <span *ngIf="rewardForm.controls.manufacturer.errors.required">This field is mandatory.</span>
+                        <span *ngIf="rewardForm.controls.manufacturer.errors.pattern">This field is invalid.</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap;">
+                <mat-form-field appearance="outline" [ngStyle]="{ 'width': '100%' }">
+                    <mat-label>Quantity Available</mat-label>
+                    <input matInput formControlName="quantityAvailable" required>
+                    <mat-error *ngIf="rewardForm.controls.quantityAvailable.touched && rewardForm.controls.quantityAvailable.invalid">
+                        <span *ngIf="rewardForm.controls.quantityAvailable.errors.required">This field is mandatory.</span>
+                        <span *ngIf="rewardForm.controls.quantityAvailable.errors.pattern">This field is invalid.</span>
+                        <span *ngIf="rewardForm.controls.quantityAvailable.errors.min">The minimum quantity allowed is 0.</span>
+                        <span *ngIf="rewardForm.controls.quantityAvailable.errors.max">The maximum quantity allowed is 10,000.</span>
+                        <span *ngIf="rewardForm.controls.quantityAvailable.errors.pattern">This field contains invalid characters.</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap;">
+                <mat-form-field appearance="outline" [ngStyle]="{ 'width': '100%' }">
+                    <mat-label>Image url</mat-label>
+                    <input matInput formControlName="imageThumbnailUrl" required>
+                    <mat-error *ngIf="rewardForm.controls.imageThumbnailUrl.touched && rewardForm.controls.imageThumbnailUrl.invalid">
+                        <span *ngIf="rewardForm.controls.imageThumbnailUrl.errors.required">This field is mandatory.</span>
+                        <span *ngIf="rewardForm.controls.imageThumbnailUrl.errors.pattern">This field is invalid.</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap;">
+                <mat-form-field appearance="outline" [ngStyle]="{ 'width': '100%' }">
+                    <mat-label>Terms and conditions</mat-label>
+                    <input matInput formControlName="termsAndConditions" required>
+                    <mat-error *ngIf="rewardForm.controls.termsAndConditions.touched && rewardForm.controls.termsAndConditions.invalid">
+                        <span *ngIf="rewardForm.controls.termsAndConditions.errors.required">This field is mandatory.</span>
+                        <span *ngIf="rewardForm.controls.termsAndConditions.errors.pattern">This field is invalid.</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()" [disabled]="!(rewardForm.valid && rewardForm.dirty)">
+        <mat-icon>save</mat-icon> {{action}}
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close><mat-icon>cancel</mat-icon>Close</button>
+</mat-dialog-actions>

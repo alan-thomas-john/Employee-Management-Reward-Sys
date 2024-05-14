@@ -1,0 +1,198 @@
+<div class="employee-reward-container">
+
+    <div class="container">
+        <h2 class="title">Your Details</h2>
+        <h1 class="welcome-msg">Hi, {{userData?.name}}!</h1>
+        <p class="points-msg">Your Available BytePoints: {{userData?.points}}</p>
+    </div>
+
+    <hr>
+
+    <mat-card>
+        <b><span>Redeem Reward</span></b>
+        <button mat-flat-button color="primary" class="float-right" [disabled]="validateSubmit()"
+            (click)="submitAction()">
+            <mat-icon>touch_app</mat-icon> Submit
+        </button>
+        <p *ngIf="validationMessage" class="validation-message">{{ validationMessage }}</p>
+    </mat-card>
+    <hr>
+
+
+    <mat-card>
+        <b><span>Select reward:-</span></b>
+
+        <form [formGroup]="manageRedeemForm">
+            <div fxFlex fxLayout="column">
+                <div fxLayout="row wrap">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Category</mat-label>
+                        <mat-select formControlName="category" (selectionChange)="getRewardsByCategory($event.value)">
+                            <mat-option *ngFor="let category of categories" [value]="category">
+                                {{category.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Product</mat-label>
+                        <mat-select formControlName="reward" (selectionChange)="getRewardsDetails($event.value)">
+                            <mat-option *ngFor="let reward of rewards" [value]="reward">
+                                {{reward.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Manufacturer</mat-label>
+                        <input matInput formControlName="manufacturer" required readonly>
+                        <mat-error
+                            *ngIf="manageRedeemForm.controls.manufacturer.touched && manageRedeemForm.controls.manufacturer.invalid">
+                            <span *ngIf="manageRedeemForm.controls.manufacturer.error.required">This field is
+                                mandatory</span>
+                            <span *ngIf="manageRedeemForm.controls.manufacturer.error.pattern">this field is
+                                invalid</span>
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Points</mat-label>
+                        <input matInput formControlName="points" required readonly>
+                        <mat-error
+                            *ngIf="manageRedeemForm.controls.points.touched && manageRedeemForm.controls.points.invalid">
+                            <span *ngIf="manageRedeemForm.controls.points.error.required">This field is
+                                mandatory</span>
+                            <span *ngIf="manageRedeemForm.controls.points.error.pattern">this field is invalid</span>
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Quantity Available</mat-label>
+                        <input matInput formControlName="quantityAvailable" required readonly>
+                        <mat-error
+                            *ngIf="manageRedeemForm.controls.quantityAvailable.touched && manageRedeemForm.controls.quantityAvailable.invalid">
+                            <span *ngIf="manageRedeemForm.controls.quantityAvailable.error.required">This field is
+                                mandatory</span>
+                            <span *ngIf="manageRedeemForm.controls.quantityAvailable.error.pattern">this field is
+                                invalid</span>
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Terms and Conditions</mat-label>
+                        <input matInput formControlName="termsAndConditions" required readonly>
+                        <mat-error
+                            *ngIf="manageRedeemForm.controls.termsAndConditions.touched && manageRedeemForm.controls.termsAndConditions.invalid">
+                            <span *ngIf="manageRedeemForm.controls.termsAndConditions.error.required">This field is
+                                mandatory</span>
+                            <span *ngIf="manageRedeemForm.controls.termsAndConditions.error.pattern">this field is
+                                invalid</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Total</mat-label>
+                        <input matInput formControlName="total" required readonly>
+                        <mat-error
+                            *ngIf="manageRedeemForm.controls.total.touched && manageRedeemForm.controls.total.invalid">
+                            <span *ngIf="manageRedeemForm.controls.total.error.required">This field is
+                                mandatory</span>
+                            <span *ngIf="manageRedeemForm.controls.total.error.pattern">this field is
+                                invalid</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <div class="image-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Image</mat-label>
+
+                            <input matInput formControlName="imageThumbnailUrl" required readonly>
+                            <ng-container *ngIf="manageRedeemForm.controls.imageThumbnailUrl.value">
+                                <img [src]="manageRedeemForm.controls.imageThumbnailUrl.value" alt="Thumbnail"
+                                    style="max-width: 100%; height: auto;">
+                            </ng-container>
+
+                        </mat-form-field>
+                    </div>
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </form>
+
+        <div>
+            <button mat-flat-button color="primary" [disabled]="validateRewardAdd()" (click)="add()">Add</button>
+            <p *ngIf="rewardAddValidationMessage" class="validation-message">{{ rewardAddValidationMessage }}</p>
+            <button mat-flat-button color="primary" class="float-right">
+                <mat-icon>monetization_on</mat-icon> Product Points: {{totalPoints}}
+            </button>
+        </div>
+    </mat-card>
+    <hr>
+    <div class="responsive_table">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef>Category</th>
+                <td mat-cell *matCellDef="let element">{{element.category}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="manufacturer">
+                <th mat-header-cell *matHeaderCellDef>Manufacturer</th>
+                <td mat-cell *matCellDef="let element">{{element.manufacturer}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantityAvailable">
+                <th mat-header-cell *matHeaderCellDef>Availability</th>
+                <td mat-cell *matCellDef="let element">{{element.quantityAvailable > 0 ? 'Yes' : 'No'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef>Total</th>
+                <td mat-cell *matCellDef="let element">{{element.total}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="imageThumbnailUrl">
+                <th mat-header-cell *matHeaderCellDef>Reward Image</th>
+                <td mat-cell *matCellDef="let element">
+                    <img [src]="element.imageThumbnailUrl" alt="Image" style="max-width: 200px;  max-height: 300px;">
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="termsAndConditions">
+                <th mat-header-cell *matHeaderCellDef>termsAndConditions</th>
+                <td mat-cell *matCellDef="let element">{{element.termsAndConditions}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="points">
+                <th mat-header-cell *matHeaderCellDef>Points</th>
+                <td mat-cell *matCellDef="let element">{{element.points}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef>Delete</th>
+                <td mat-cell *matCellDef="let element;let i = index" class="action-link">
+                    <button mat-icon-button color="primary" matTooltip="Delete" (click)="handleDeleteAction(i,element)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+            <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+        </table>
+    </div>
+</div>

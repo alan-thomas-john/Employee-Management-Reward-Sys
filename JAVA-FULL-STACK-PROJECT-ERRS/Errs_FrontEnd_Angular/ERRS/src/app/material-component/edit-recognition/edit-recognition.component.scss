@@ -1,0 +1,32 @@
+mat-card{
+    padding: 40px;
+}
+
+ .recognition {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 90vh; /* Adjusing as needed to center vertically within the viewport */
+   }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+    max-width: 400px; /* Adjusting as needed for the maximum width */
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .col {
+    flex: 1;
+    margin-right: 10px; /* Adjusting spacing between columns */
+  }
